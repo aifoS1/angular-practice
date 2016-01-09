@@ -1,0 +1,113 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="minmax">
+<head >
+	<title >Data Binding</title >
+	<link href="../libs/bootstrap/dist/css/bootstrap.min.css"
+	      rel="stylesheet" >
+	<link href="../libs/ladda/dist/ladda-themeless.min.css" rel="stylesheet" >
+	<link href="main.css"
+	      rel="stylesheet" >
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+</head >
+
+<body>
+<nav class="navbar navbar-inverse">
+	<div class="container" >
+		<div class="navbar-header">
+			<a class="navbar-brand"
+			href="/">Controllers
+			</a>
+		</div>
+	</div >	
+</nav>
+
+<div class="container main-content" ng-controller="MinMaxCtrl">
+
+	<form ng-submit="onSubmit()"
+			novalidate="novalidate">
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text"
+			 class="form-control"
+			 ng-model="formModel.name"
+			 id="name">
+		</div>
+		<!-- bootstrap class 'has error and has-success change color of input if true or false'  pristine= not touched by user-->
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email"
+			ng-model="formModel.email"
+			 class="form-control"
+			 id="email"
+			 required="required"
+			 name="email">
+		</div>
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text"
+			ng-model="formModel.username"
+			 class="form-control"
+			 ng-pattern="/^[A-Za-z0-9_]{1,15}$/"
+			 ng-minlength="7"
+			 ng-pattern-err-type="badUsername"
+			 id="username"
+			 required="required">
+		</div>
+		<div class="form-group">
+			<label for="age">Age</label>
+			<input type="number"
+			ng-model="formModel.age"
+			 class="form-control"
+			 id="age"
+			 min="18"
+			 max="64"
+			 ng-min-err-type="tooYoung"
+			 ng-max-err-type="tooOld"
+			 required="required">
+		</div>
+		<div class="form-group">
+			<label for="sex">Sex</label>
+			<select name="sex"
+			ng-model="formModel.sex"
+			 class="form-control"
+			 required="required"
+			 id="sex">
+				 <option value="">Please Choose</option>
+				 <option value="male">Male</option>
+				 <option value="female">Female</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="text"
+			 class="form-control"
+			 ng-model="formModel.password"
+			 id="password"
+			 ng-minlength="10"
+			 required="required">
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary" 
+					ladda="submitting"
+					data-style="expand-right"
+					type="submit">
+					<span ng-show="submitting">Registering</span>
+					<span ng-show="!submitting">Register</span>
+			</button>
+		</div>
+	</form>
+	<pre>{{ formModel | json }}</pre>
+</div>
+</div>
+
+
+
+<script src="../libs/angular/angular.min.js" ></script>
+<script src="../libs/angular-auto-validate/dist/jcs-auto-validate.min.js"></script>
+<script src="../libs/ladda/dist/spin.min.js" ></script >
+<script src="../libs/ladda/dist/ladda.min.js" ></script >
+<script src="../libs/angular-ladda/dist/angular-ladda.min.js" ></script>
+<script src="main.js" ></script>
+
+</body>
+</html>
